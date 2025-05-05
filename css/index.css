@@ -22,7 +22,9 @@ width:45%;
 .carousel-indicators{
 bottom:0; 
  }
-
+.carousel-control-next,.carousel-control-prev {
+    z-index: 100;
+}
 /*********************center_home_end****************/
 
 /*********************trend****************/
