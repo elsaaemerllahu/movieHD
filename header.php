@@ -18,7 +18,7 @@
       <div class="col-md-3">
             <div class="top_1l pt-1">
               <h3 class="mb-0">
-                <a class="text-white" href="index.html">
+                <a class="text-white" href="index.php" style="text-decoration: none;">
                 <img src="img/movie.png" alt="Logo" style="width: 40px;" class="me-1"></i> MovieHD
                 </a>
               </h3>
@@ -63,7 +63,7 @@
 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" role="button" data-bs-toggle="dropdown">Zhanre</a>
-            <ul class="dropdown-menu drop_1">
+            <ul class="dropdown-menu drop_1" style="padding: 0;">
               <li><a class="dropdown-item" href="genre.php?genre=10751&title=Family">Familjarë</a></li>
               <li><a class="dropdown-item" href="genre.php?genre=28&title=Action">Aksion</a></li>
               <li><a class="dropdown-item" href="genre.php?genre=9648&title=Mystery">Mister</a></li>

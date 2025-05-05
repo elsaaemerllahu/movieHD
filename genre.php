@@ -29,7 +29,15 @@
       <!-- Movies will be inserted here -->
     </div>
     <div class="text-center mt-4">
-      <button id="loadMoreBtn" class="btn btn-primary">Load More</button>
+    <<div class="text-center mt-4">
+  <button id="loadMoreBtn" class="btn btn-primary">Load More</button>
+  <div id="loadingIndicator" class="mt-3 d-none">
+    <div class="spinner-border text-primary" role="status"></div>
+    <div class="text-white mt-2">Loading movies...</div>
+  </div>
+</div>
+
+
     </div>
   </div>
 </section>
@@ -43,6 +51,13 @@ let totalLoadedMovies = 0;
 const MAX_MOVIES = 50;
 
 async function loadGenreMovies(page) {
+  const btn = document.getElementById('loadMoreBtn');
+  const loader = document.getElementById('loadingIndicator');
+
+  // Hide button, show loader
+  btn.classList.add('d-none');
+  loader.classList.remove('d-none');
+
   if (totalLoadedMovies >= MAX_MOVIES) return;
 
   try {
@@ -62,12 +77,12 @@ async function loadGenreMovies(page) {
           <div class="trend_2im1 clearfix">
             <div class="grid">
               <figure class="effect-jazz mb-0">
-                <a href="#"><img src="${IMAGE_BASE_URL}${movie.poster_path}" class="w-100" alt="${movie.title}"></a>
+                <a href="movie.php?id=${movie.id}"><img src="${IMAGE_BASE_URL}${movie.poster_path}" class="w-100" alt="${movie.title}"></a>
               </figure>
             </div>
           </div>
           <div class="trend_2ilast bg_grey p-2 clearfix">
-            <h6><a class="col_red" href="#">${movie.title}</a></h6>
+            <h6><a class="col_red" href="movie.php?id=${movie.id}">${movie.title}</a></h6>
           </div>
         </div>
       `;
@@ -76,10 +91,16 @@ async function loadGenreMovies(page) {
     });
 
     if (totalLoadedMovies >= MAX_MOVIES || currentPage >= data.total_pages) {
-      document.getElementById('loadMoreBtn').style.display = 'none';
+      btn.style.display = 'none';
+    } else {
+      btn.classList.remove('d-none');
     }
+
   } catch (error) {
     console.error('Error loading movies:', error);
+    btn.classList.remove('d-none');
+  } finally {
+    loader.classList.add('d-none');
   }
 }
 

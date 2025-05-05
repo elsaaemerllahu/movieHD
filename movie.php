@@ -52,33 +52,43 @@ include 'header.php'; // Include the header file
                   <h6 class="fw-normal">Genre: <span class="pull-right" id="genreList">...</span></h6>
                   <hr class="hr_1">
                   <h6 class="fw-normal">Release Date: <span class="pull-right" id="releaseDate">...</span></h6>
-                  <hr class="hr_1 mb-0">
+                  <hr class="hr_1 mb-0"> <br>
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="play2rir" style="color:rgb(219, 219, 219);">
-                  <h6 class="fw-normal">IMDb</h6>
-                  <div class="progress" style="height: 15px;">
-                    <div class="progress-bar" id="imdbProgress" style="width: 0%;" role="progressbar"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+  <div class="play2rir text-white">
+    <h6 class="fw-bold mb-2">IMDb Rating</h6>
+    <div class="progress mb-3" style="height: 18px; background-color: #333;">
+      <div class="progress-bar bg-danger" id="imdbProgress" style="width: 0%;" role="progressbar"></div>
+    </div>
+    
+    <button class="btn btn-danger w-100">
+      <i class="fa fa-plus me-2"></i> Add to Watchlist
+    </button>
+  </div>
+</div>
 
-            <!-- Optional: Watchlist and comments -->
-            <div class="mt-5">
-              <button class="btn btn-danger">+ Add to Watchlist</button>
-              <div class="mt-4">
-                <h6 class="text-white">Comments</h6>
-                <textarea class="form-control mb-2" placeholder="Add a comment..."></textarea>
-                <button class="btn btn-primary">Submit</button>
-              </div>
             </div>
-
           </div>
         </div>
-
       </div> 
+      <!-- WATCHLIST AND COMMENTS (OUTSIDE) -->
+<div class="bg_grey mt-4 p-4" style="border-radius: 8px;">
+  <div class="container">
+    <div class="row">
+      
+    <div class="col-md-12">
+  <h6 class="text-white mb-2">Comments</h6>
+  <div class="d-flex align-items-start gap-2">
+    <textarea class="form-control" placeholder="Add a comment..." rows="1" style="resize: none; flex: 1; padding:10px"></textarea>
+    <button class="btn btn-primary" style="padding: 10px 50px">Submit</button>
+  </div>
+</div>
+
+    </div>
+  </div>
+</div>
+
     </div>
   </div>
 </section>
