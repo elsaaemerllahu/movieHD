@@ -10,25 +10,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // Validate required fields
     if (empty($username) || empty($email) || empty($password)) {
-        header("Location: ../login.php?error=Të gjitha fushat janë të detyrueshme");
+        $_SESSION['error'] = "Të gjitha fushat janë të detyrueshme";
+        header("Location: ../login.php");
         exit;
     }
 
     // Validate username format (alphanumeric and underscore only, 3-20 chars)
     if (!preg_match('/^[a-zA-Z0-9_]{3,20}$/', $username)) {
-        header("Location: ../login.php?error=Username duhet të përmbajë vetëm shkronja, numra dhe underscore (_), 3-20 karaktere");
+        $_SESSION['error'] = "Username duhet të përmbajë vetëm shkronja, numra dhe underscore (_), 3-20 karaktere";
+        header("Location: ../login.php");
         exit;
     }
 
     // Validate email
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header("Location: ../login.php?error=Email format i pavlefshëm");
+        $_SESSION['error'] = "Email format i pavlefshëm";
+        header("Location: ../login.php");
         exit;
     }
 
     // Validate password strength (at least 8 chars, 1 uppercase, 1 lowercase, 1 number)
     if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/', $password)) {
-        header("Location: ../login.php?error=Fjalëkalimi duhet të ketë të paktën 8 karaktere, një shkronjë të madhe, një të vogël dhe një numër");
+        $_SESSION['error'] = "Fjalëkalimi duhet të ketë të paktën 8 karaktere, një shkronjë të madhe, një të vogël dhe një numër";
+        header("Location: ../login.php");
         exit;
     }
 
@@ -44,7 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $checkResult = $checkStmt->get_result();
 
         if ($checkResult->num_rows > 0) {
-            header("Location: ../login.php?error=Ky emër përdoruesi ose email ekziston tashmë");
+            $_SESSION['error'] = "Ky emër përdoruesi ose email ekziston tashmë";
+            header("Location: ../login.php");
             exit;
         }
 
@@ -78,7 +83,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     } catch (Exception $e) {
         error_log("Signup error: " . $e->getMessage());
-        header("Location: ../login.php?error=Një gabim ndodhi. Ju lutem provoni përsëri");
+        $_SESSION['error'] = "Një gabim ndodhi. Ju lutem provoni përsëri";
+        header("Location: ../login.php");
         exit;
     } finally {
         if (isset($checkStmt)) {
@@ -90,4 +96,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
-

@@ -70,7 +70,7 @@
               <li><a class="dropdown-item" href="genre.php?genre=18&title=Drama">Drama</a></li>
             </ul>
           </li>
-          <li class="nav-item"><a class="nav-link" href="login.html">Kyçu</a></li>
+          <li class="nav-item"><a class="nav-link" href="login.php">Kyçu</a></li>
         </ul>
       </div>
 

@@ -1,16 +1,25 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<link href="css/login.css" rel="stylesheet">
 </head>
 <body>
+
+<?php
+if (isset($_SESSION['error'])) {
+    echo "<div class='error-message' style='color:red; text-align:center; margin:10px 0;'>" . htmlspecialchars($_SESSION['error']) . "</div>";
+    unset($_SESSION['error']);
+}
+?>
+
 <div class="container" id="container">
 	<div class="form-container sign-up-container">
 		<form action="logic/signup.php" method="POST">
 			<h1>Create Account</h1>
 			<span>or use your email for registration</span>
 			<input type="text" placeholder="Username" name="username" />
-			<input type="email" placeholder="Email"name="email" />
+			<input type="email" placeholder="Email" name="email" />
 			<input type="password" placeholder="Password" name="password"/>
 			<button>Sign Up</button>
 		</form>
@@ -18,11 +27,9 @@
 	<div class="form-container sign-in-container">
 		<form action="logic/login.php" method="post">
 			<h1>Sign in</h1>
-			
 			<span>or use your account</span>
 			<input type="username" placeholder="Username" name="username" />
 			<input type="password" placeholder="Password" name="password"/>
-
 			<button>Sign In</button>
 		</form>
 	</div>
@@ -41,6 +48,7 @@
 		</div>
 	</div>
 </div>
+
 <script src="js/login.js"></script>
 <footer>
 	
