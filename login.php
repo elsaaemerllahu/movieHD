@@ -17,7 +17,7 @@ if (isset($_SESSION['error'])) {
 	<div class="form-container sign-up-container">
 		<form action="logic/signup.php" method="POST">
 			<h1>Create Account</h1>
-			<span>or use your email for registration</span>
+			
 			<input type="text" placeholder="Username" name="username" />
 			<input type="email" placeholder="Email" name="email" />
 			<input type="password" placeholder="Password" name="password"/>
