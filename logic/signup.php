@@ -2,6 +2,14 @@
 session_start();
 require 'config.php';
 
+// Verify database connection
+if (!isset($conn) || $conn->connect_error) {
+    error_log("Database connection failed: " . ($conn->connect_error ?? 'Connection not established'));
+    $_SESSION['error'] = "Lidhja me databazën dështoi. Ju lutem provoni përsëri.";
+    header("Location: ../login.php");
+    exit;
+}
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Validate and sanitize inputs
     $username = isset($_POST['username']) ? trim(strip_tags($_POST['username'])) : '';
@@ -60,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $role = "user";
 
         // Insert new user with prepared statement
-        $insertStmt = $conn->prepare("INSERT INTO user (username, email, password, role, created_at) VALUES (?, ?, ?, ?, NOW())");
+        $insertStmt = $conn->prepare("INSERT INTO user (username, email, password, role) VALUES (?, ?, ?, ?)");
         if (!$insertStmt) {
             throw new Exception("Database error");
         }
@@ -82,8 +90,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             throw new Exception("Error inserting user");
         }
     } catch (Exception $e) {
-        error_log("Signup error: " . $e->getMessage());
-        $_SESSION['error'] = "Një gabim ndodhi. Ju lutem provoni përsëri";
+        error_log("Signup error: " . $e->getMessage() . "\n" . 
+                  "Stack trace: " . $e->getTraceAsString());
+        $_SESSION['error'] = "Një gabim ndodhi: " . $e->getMessage();
         header("Location: ../login.php");
         exit;
     } finally {
