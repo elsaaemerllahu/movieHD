@@ -62,9 +62,19 @@ include 'header.php'; // Include the header file
       <div class="progress-bar bg-danger" id="imdbProgress" style="width: 0%;" role="progressbar"></div>
     </div>
     
-    <button class="btn btn-danger w-100">
-      <i class="fa fa-plus me-2"></i> Add to Watchlist
-    </button>
+    <form id="watchlistForm" method="post" action="add_to_watchlist.php">
+  <input type="hidden" name="movie_id" id="formMovieId">
+  <input type="hidden" name="title" id="formTitle">
+  <input type="hidden" name="poster_path" id="formPosterPath">
+  <input type="hidden" name="genre" id="formGenre">
+  <input type="hidden" name="release_date" id="formReleaseDate">
+  <button type="submit" class="btn btn-warning" >
+     Add to Watchlist
+  </button>
+</form>
+
+</form>
+
   </div>
 </div>
 
@@ -117,6 +127,13 @@ include 'header.php'; // Include the header file
       const imdbPercent = Math.round((movie.vote_average / 10) * 100);
       document.getElementById('imdbProgress').style.width = imdbPercent + '%';
       document.getElementById('imdbProgress').textContent = imdbPercent + '%';
+      
+      
+      document.getElementById('formMovieId').value = movie.id;
+    document.getElementById('formTitle').value = movie.title;
+    document.getElementById('formPosterPath').value = movie.poster_path;
+    document.getElementById('formGenre').value = genres;
+    document.getElementById('formReleaseDate').value = movie.release_date;
     } catch (err) {
       console.error('Error fetching movie:', err);
     }
@@ -124,6 +141,35 @@ include 'header.php'; // Include the header file
 
   loadMovieDetails();
 </script>
+
+<script>
+document.getElementById('watchlistForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevent default form submission
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    fetch('add_to_watchlist.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('✔️ ' + data.message);
+        } else {
+            alert('⚠️ ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('❌ Something went wrong.');
+    });
+});
+</script>
+
+
+
 
 </body>
 </html>
