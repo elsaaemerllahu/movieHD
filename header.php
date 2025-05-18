@@ -1,3 +1,6 @@
+<?php
+$currentPage = basename($_SERVER['PHP_SELF']);
+?>
 <html>
     <head>
         <meta charset="utf-8">
@@ -62,10 +65,9 @@
       <!-- Navigation menu -->
       <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
         <ul class="navbar-nav mb-0">
-          <li class="nav-item"><a class="nav-link active" href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../index.php' : 'index.php'; ?>">Ballina</a></li>
-          <li class="nav-item"><a class="nav-link" href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../watchlist.php' : 'watchlist.php'; ?>">Për t'u parë</a></li>
-          <li class="nav-item"><a class="nav-link" href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../watched.php' : 'watched.php'; ?>">Të shikuarat</a></li>
-
+          <li class="nav-item"><a class="nav-link <?= $currentPage == 'index.php' ? 'active text-danger' : '' ?>" href="index.php">Ballina</a></li>
+          <li class="nav-item"><a class="nav-link <?= $currentPage == 'watchlist.php' ? 'active text-danger' : '' ?>" href="watchlist.php">Për t'u parë</a></li>
+          <li class="nav-item"><a class="nav-link <?= $currentPage == 'watched.php' ? 'active text-danger' : '' ?>" href="watched.php">Të shikuarat</a></li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" role="button" data-bs-toggle="dropdown">Zhanre</a>
             <ul class="dropdown-menu drop_1" style="padding: 0;">
@@ -75,7 +77,15 @@
               <li><a class="dropdown-item" href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../genre.php?genre=18&title=Drama' : 'genre.php?genre=18&title=Drama'; ?>">Drama</a></li>
             </ul>
           </li>
-          <li class="nav-item"><a class="nav-link" href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../login.php' : 'login.php'; ?>">Kyçu</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle <?= $currentPage == 'profil.php' ? 'active text-danger' : '' ?>" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-user"></i></a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                <li><a class="dropdown-item <?= $currentPage == 'profil.php' ? 'text-danger fw-bold' : '' ?>" href="profil.php">Profili</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="login.php">Çkyçu</a></li>
+              </ul>
+          </li>
+
         </ul>
       </div>
 
