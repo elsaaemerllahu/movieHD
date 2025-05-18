@@ -87,37 +87,50 @@ $user = $result->fetch_assoc();
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="movie_card p-4 rounded-4">
-                <h2 class="text-white mb-4">Profili im</h2>
+                
 
                 <?php if (isset($success)): ?>
                     <div class="alert alert-success"><?= $success ?></div>
                 <?php endif; ?>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="text-white">Profili im</h2>
+                    <button type="button" class="btn btn-sm btn-light" id="editBtn">
+                        <i class="fa fa-pencil"></i> Ndrysho
+                    </button>
+                </div>
 
                 <form method="post">
                     <div class="mb-3">
                         <label class="form-label text-white">Username:</label>
-                        <input type="text" name="username" class="form-control" value="<?= htmlspecialchars($user['username']) ?>" required>
+                        <p class="form-control-plaintext text-white" id="usernameDisplay"><?= htmlspecialchars($user['username']) ?></p>
+                        <input type="text" name="username" id="usernameInput" class="form-control d-none" value="<?= htmlspecialchars($user['username']) ?>" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label text-white">Email:</label>
-                        <input type="email" name="email" class="form-control" value="<?= htmlspecialchars($user['email']) ?>" required>
+                        <p class="form-control-plaintext text-white" id="emailDisplay"><?= htmlspecialchars($user['email']) ?></p>
+                        <input type="email" name="email" id="emailInput" class="form-control d-none" value="<?= htmlspecialchars($user['email']) ?>" required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label text-white">Roli:</label>
-                        <input type="text" class="form-control" value="<?= htmlspecialchars($user['role']) ?>" readonly>
+                        <p class="form-control-plaintext text-white"><?= htmlspecialchars($user['role']) ?></p>
                     </div>
                         <hr class="text-white">
 
-    <div class="mb-3">
-        <label class="form-label text-white">Fjalëkalimi aktual:</label>
-        <input type="password" name="current_password" class="form-control">
-    </div>
-    <div class="mb-3">
-        <label class="form-label text-white">Fjalëkalimi i ri:</label>
-        <input type="password" name="new_password" class="form-control">
-    </div>
+                    
+                    <div id="passwordFields" class="d-none">
+                        <div class="mb-3">
+                            <label class="form-label text-white">Fjalëkalimi aktual:</label>
+                            <input type="password" name="current_password" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-white">Fjalëkalimi i ri:</label>
+                            <input type="password" name="new_password" class="form-control">
+                        </div>
+                    </div>
 
-                    <button type="submit" class="btn btn-warning">Ruaj ndryshimet</button>
+
+                    <button type="submit" class="btn btn-warning mt-3" id="saveBtn" style="display: none;">Ruaj ndryshimet</button>
+
                 </form>
             </div>
         </div>
@@ -125,5 +138,47 @@ $user = $result->fetch_assoc();
 </div>
 
 <?php include 'footer.php'; ?>
+
+<script>
+document.getElementById('editBtn').addEventListener('click', function () {
+    // Hiq readonly nga username/email
+    document.querySelectorAll('input[name="username"], input[name="email"]').forEach(function(input) {
+        input.removeAttribute('readonly');
+    });
+
+    // Aktivizo input-et për password
+    document.querySelectorAll('input[name="current_password"], input[name="new_password"]').forEach(function(input) {
+        input.removeAttribute('disabled');
+    });
+
+    // Shfaq butonin "Ruaj ndryshimet"
+    document.getElementById('saveBtn').style.display = 'inline-block';
+
+    // Fsheh butonin "Ndrysho"
+    this.style.display = 'none';
+});
+</script>
+<script>
+document.getElementById('editBtn').addEventListener('click', function () {
+    // Fsheh tekstin
+    document.getElementById('usernameDisplay').classList.add('d-none');
+    document.getElementById('emailDisplay').classList.add('d-none');
+
+    // Shfaq input-et
+    document.getElementById('usernameInput').classList.remove('d-none');
+    document.getElementById('emailInput').classList.remove('d-none');
+
+    // Shfaq fushat e passwordit
+    document.getElementById('passwordFields').classList.remove('d-none');
+
+    // Shfaq butonin "Ruaj"
+    document.getElementById('saveBtn').classList.remove('d-none');
+
+    // Fsheh butonin "Ndrysho"
+    this.style.display = 'none';
+});
+</script>
+
+
 </body>
 </html>

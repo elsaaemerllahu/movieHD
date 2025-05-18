@@ -23,7 +23,7 @@ $watchlist = $result->fetch_all(MYSQLI_ASSOC);
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Profili im</title>
+	<title>Për t'u parë</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/font-awesome.min.css" rel="stylesheet">
 	<link href="css/global.css" rel="stylesheet">
@@ -69,7 +69,7 @@ $watchlist = $result->fetch_all(MYSQLI_ASSOC);
                                         <?= htmlspecialchars($movie['title']) ?>
                                     </a>
                                 </h6>
-                                <a href="remove_from_watchlist.php?movie_id=<?= $movie['movie_id'] ?>" class="btn btn-sm btn-danger">
+                                <a href="remove_from_watchlist.php?movie_id=<?= $movie['movie_id'] ?>" class="btn btn-danger">
                                      Remove
                                 </a>
                             </div>
