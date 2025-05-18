@@ -29,10 +29,13 @@ $watchlist = $result->fetch_all(MYSQLI_ASSOC);
 	<link href="css/global.css" rel="stylesheet">
 	<link href="css/index.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Rajdhani&display=swap" rel="stylesheet">
-	<script src="js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76A2z02tPqdj+vP0gqLr2vyzA6jz5x9ONe2XqO/n1RW0W53+zE6rjgm+Yc4kzYG" crossorigin="anonymous"></script>
+
 </head>
 <body style="background-color:rgb(0, 0, 0);">
+
 <?php include 'header.php'; ?>
+
 
 <section id="trend" class="pt-4 pb-5">
     <div class="container">
@@ -81,14 +84,47 @@ $watchlist = $result->fetch_all(MYSQLI_ASSOC);
             <?php endif; ?>
         </div>
     </div>
+    <?php if (count($watchlist) > 12): ?>
+    <div class="text-center mt-3">
+        <button id="loadMoreBtn" class="btn btn-outline-light">Load More</button>
+    </div>
+<?php endif; ?>
+
 </section>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 <?php include 'footer.php'; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const movieItems = document.querySelectorAll("#familyMovies > .col-md-3");
+        const loadMoreBtn = document.getElementById("loadMoreBtn");
+        let visibleCount = 12;
+
+        // Initially show only 12
+        movieItems.forEach((item, index) => {
+            if (index >= visibleCount) {
+                item.style.display = "none";
+            }
+        });
+
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener("click", function () {
+                let newVisible = visibleCount + 12;
+                movieItems.forEach((item, index) => {
+                    if (index < newVisible) {
+                        item.style.display = "block";
+                    }
+                });
+                visibleCount = newVisible;
+
+                if (visibleCount >= movieItems.length) {
+                    loadMoreBtn.style.display = "none";
+                }
+            });
+        }
+    });
+</script>
 
 </body>
 </html>
