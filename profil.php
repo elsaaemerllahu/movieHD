@@ -64,7 +64,6 @@ $user = $result->fetch_assoc();
     <div class="alert alert-danger"><?= $error ?></div>
 <?php endif; ?>
 
-<?php include 'header.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
