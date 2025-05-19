@@ -84,7 +84,7 @@ $watchlist = $result->fetch_all(MYSQLI_ASSOC);
     </div>
     <?php if (count($watchlist) > 12): ?>
     <div class="text-center mt-3">
-        <button id="loadMoreBtn" class="btn btn-outline-light">Load More</button>
+        <button id="loadMoreBtn" class="btn btn-outline-light">Shiko me shume</button>
     </div>
 <?php endif; ?>
 
@@ -99,7 +99,7 @@ $watchlist = $result->fetch_all(MYSQLI_ASSOC);
         const loadMoreBtn = document.getElementById("loadMoreBtn");
         let visibleCount = 12;
 
-        // Initially show only 12
+        
         movieItems.forEach((item, index) => {
             if (index >= visibleCount) {
                 item.style.display = "none";
