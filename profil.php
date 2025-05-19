@@ -52,7 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-// Merr të dhënat aktuale nga databaza
 $sql = "SELECT username, email, role FROM user WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
@@ -64,7 +63,7 @@ $user = $result->fetch_assoc();
     <div class="alert alert-danger"><?= $error ?></div>
 <?php endif; ?>
 
-
+<?php include 'header.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,7 +80,7 @@ $user = $result->fetch_assoc();
 </head>
 <body style="background-color:rgb(0, 0, 0);">
 
-<?php include 'header.php'; ?>
+
 
 <div class="container my-5">
     <div class="row justify-content-center">
@@ -101,7 +100,7 @@ $user = $result->fetch_assoc();
 
                 <form method="post">
                     <div class="mb-3">
-                        <label class="form-label text-white">Username:</label>
+                        <label class="form-label text-white">Emri:</label>
                         <p class="form-control-plaintext text-white" id="usernameDisplay"><?= htmlspecialchars($user['username']) ?></p>
                         <input type="text" name="username" id="usernameInput" class="form-control d-none" value="<?= htmlspecialchars($user['username']) ?>" required>
                     </div>
@@ -129,7 +128,7 @@ $user = $result->fetch_assoc();
                     </div>
 
 
-                    <button type="submit" class="btn btn-warning mt-3" id="saveBtn" style="display: none;">Ruaj ndryshimet</button>
+                    <button type="submit" class="btn btn-danger btn-sm" id="saveBtn" style="display: none;">Ruaj ndryshimet</button>
 
                 </form>
             </div>
