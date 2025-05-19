@@ -5,6 +5,7 @@ if (isset($_SESSION['message'])) {
   unset($_SESSION['message']);
 }
 
+$movieId = isset($_GET['id']) ? $_GET['id'] : null;
 
 
 $isLoggedIn = isset($_SESSION['user_id']);
@@ -15,7 +16,17 @@ require './logic/config.php'; // connection to DB
 
 $userId = $_SESSION['user_id']; // make sure this is set at login
 
-$query = $conn->prepare("SELECT * FROM watched_movies WHERE user_id = ? ORDER BY id DESC");
+$query = $conn->prepare("
+  SELECT wm.*, r.rating 
+  FROM watched_movies wm
+  LEFT JOIN movie_reviews r 
+    ON wm.user_id = r.user_id 
+    AND wm.movie_id = r.movie_id 
+    AND r.rating IS NOT NULL
+  WHERE wm.user_id = ?
+  ORDER BY wm.id DESC
+");
+
 $query->bind_param("i", $userId);
 $query->execute();
 $result = $query->get_result();
@@ -92,19 +103,28 @@ include 'header.php';
       <?php foreach ($movies as $movie): ?>
         <div class="movie-item" id="movie-<?= $movie['id'] ?>">
           <div class="card bg-dark text-white h-100">
-            <img src="<?= htmlspecialchars($movie['movie_poster'] ?? 'default.jpg') ?>"
-               class="card-img-top" alt="Poster" style="height: 600px; object-fit: cover;">
+            <img src="<?= htmlspecialchars($movie['movie_poster'] ?? 'default.jpg') ?>" class="card-img-top" alt="Poster" style="height: 600px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title">
+                <a href="movie.php?id=<?= urlencode($movie['movie_id']) ?>" class="text-white text-decoration-none">
+              <?= htmlspecialchars($movie['movie_title']) ?>
+                </a>  
+              </h5>
+            </div>
             <div class="card-body d-flex flex-row justify-content-between align-items-center">
-              <h5 class="card-title"><?= htmlspecialchars($movie['movie_title']) ?></h5>
-              <button
-                class="btn btn-danger mt-auto delete-button"
-                data-id="<?= $movie['id'] ?>"
-                data-movie-container-id="movie-<?= $movie['id'] ?>"
-              >
+              <?php if (!empty($movie['rating'])): ?>
+                <p class="mb-0 text-warning">Vlerësimi juaj: <?= htmlspecialchars($movie['rating']) ?>/5</p>
+              <?php else: ?>
+                <p class="mb-0 text-muted">Pa vlerësim</p>
+              <?php endif; ?>
+              <button class="btn btn-danger mt-auto delete-button"
+                      data-id="<?= $movie['id'] ?>"
+                      data-movie-container-id="movie-<?= $movie['id'] ?>">
                 Hiqe nga të shikuara
               </button>
             </div>
           </div>
+
         </div>
       <?php endforeach; ?>
     </div>

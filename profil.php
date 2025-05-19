@@ -6,6 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
+ include 'header.php';
 
 $user_id = $_SESSION['user_id'];
 
@@ -80,9 +81,6 @@ $user = $result->fetch_assoc();
 	<script src="js/bootstrap.bundle.min.js"></script>
 </head>
 <body style="background-color:rgb(0, 0, 0);">
-
-<?php include 'header.php'; ?>
-
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-md-6">

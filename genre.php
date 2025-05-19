@@ -27,8 +27,8 @@
       <!-- Movies will be inserted here -->
     </div>
     <div class="text-center mt-4">
-    <<div class="text-center mt-4">
-  <button id="loadMoreBtn" class="btn btn-primary">Shiko me shume</button>
+    <div class="text-center mt-4">
+  <button id="loadMoreBtn" class="btn" style="background-color: #de1002; color:white" >Shiko me shume</button>
   <div id="loadingIndicator" class="mt-3 d-none">
     <div class="spinner-border text-primary" role="status"></div>
     <div class="text-white mt-2">Duke ngarkuar filmat...</div>
@@ -39,7 +39,7 @@
     </div>
   </div>
 </section>
-
+<?php include 'footer.php'?>
 <script>
 const apiKey = '5b3121364d29d3b272e13672cd8c9078';
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
