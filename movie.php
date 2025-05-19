@@ -226,22 +226,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_watchlist'])) {
           </div>
         </div>
       </div> 
-      <div class="bg_grey mt-4 p-4 text-white" style="border-radius: 8px;">
-        <h6 class="mb-2">Shkruaj një Koment</h6>
-        <form id="reviewForm">
-          <input type="hidden" name="movie_id" id="reviewMovieId">
-          <div class="mb-2">
-            <span class="star" data-value="1">&#9733;</span>
-            <span class="star" data-value="2">&#9733;</span>
-            <span class="star" data-value="3">&#9733;</span>
-            <span class="star" data-value="4">&#9733;</span>
-            <span class="star" data-value="5">&#9733;</span>
-          </div>
-          <input type="hidden" name="rating" id="ratingValue">
-          <textarea class="form-control mb-2" name="comment" placeholder="" rows="2" style="resize: none;"></textarea>
-          <button type="submit" class="btn btn-danger">Dergo</button>
-        </form>
-      </div>
+      <?php if ($isLoggedIn): ?>
+        <div class="bg_grey mt-4 p-4 text-white" style="border-radius: 8px;">
+          <h6 class="mb-2">Shkruaj një Koment</h6>
+          <form id="reviewForm">
+            <input type="hidden" name="movie_id" id="reviewMovieId">
+            <div class="mb-2">
+              <span class="star" data-value="1">&#9733;</span>
+              <span class="star" data-value="2">&#9733;</span>
+              <span class="star" data-value="3">&#9733;</span>
+              <span class="star" data-value="4">&#9733;</span>
+              <span class="star" data-value="5">&#9733;</span>
+            </div>
+            <input type="hidden" name="rating" id="ratingValue">
+            <textarea class="form-control mb-2" name="comment" placeholder="" rows="2" style="resize: none;"></textarea>
+            <button type="submit" class="btn btn-danger">Dergo</button>
+          </form>
+        </div>
+      <?php endif; ?>
 
       <div class="bg_grey mt-4 p-4" style="border-radius: 8px;">
 
