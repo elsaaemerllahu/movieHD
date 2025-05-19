@@ -76,15 +76,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $insertStmt->bind_param("ssss", $username, $email, $hashedPassword, $role);
 
         if ($insertStmt->execute()) {
-            // Set session variables
-            $_SESSION['user_id'] = $insertStmt->insert_id;
-            $_SESSION['username'] = htmlspecialchars($username);
-            $_SESSION['role'] = htmlspecialchars($role);
-
-            // Regenerate session ID to prevent session fixation
-            session_regenerate_id(true);
-
-            header("Location: ../index.php");
+            // Redirect to login page with success message
+            $_SESSION['success'] = "Regjistrimi u krye me sukses! Ju lutem identifikohuni.";
+            header("Location: ../login.php");
             exit;
         } else {
             throw new Exception("Error inserting user");

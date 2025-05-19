@@ -90,10 +90,12 @@ $currentPage = basename($_SERVER['PHP_SELF']);
             <a class="nav-link dropdown-toggle <?= $currentPage == 'profil.php' ? 'active text-danger' : '' ?>" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-user"></i></a>
               <ul class="dropdown-menu drop_1" aria-labelledby="profileDropdown">
                 <li><a class="dropdown-item <?= $currentPage == 'profil.php' ? 'text-danger fw-bold' : '' ?>" href="profil.php">Profili</a></li>
-                <li><a class="dropdown-item" href="login.php">Çkyçu</a></li>
+                <li><a class="dropdown-item" href="logic/logout.php">Çkyçu</a></li>
               </ul>
           </li>
-
+          <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+              <li class="nav-item"><a class="nav-link" href="logic/admin_users.php">Users</a></li>
+          <?php endif; ?>
         </ul>
       </div>
     </nav>

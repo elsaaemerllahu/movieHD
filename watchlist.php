@@ -3,7 +3,7 @@ session_start();
 require_once "./logic/config.php";
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ./logic/login.php");
+    header("Location: login.php");
     exit();
 }
 include 'header.php';

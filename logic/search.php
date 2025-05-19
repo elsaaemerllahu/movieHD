@@ -13,9 +13,10 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="background-color:rgb(0, 0, 0);">
 
 <?php include '../header.php'; ?>
+
 
 <section id="trend" class="pt-4 pb-5">
     <div class="container">
@@ -31,7 +32,7 @@
             echo "<div class='row trend_1'>";
             echo "<div class='col-md-6'>";
             echo "<div class='trend_1l'>";
-            echo "<h4 class='mb-0'><i class='fa fa-search col_red me-1'></i> Search Results for: <span class='col_red'>" . htmlspecialchars($term) . "</span></h4>";
+            echo "<h4 class='mb-0 text-white'><i class='fa fa-search col_red me-1'></i> Search Results for: <span class='col_red'>" . htmlspecialchars($term) . "</span></h4>";
             echo "</div>";
             echo "</div>";
             echo "</div>";

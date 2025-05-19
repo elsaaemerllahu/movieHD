@@ -12,7 +12,6 @@ $loggedInUserId = $_SESSION['user_id'] ?? null;
 $movieRating = 0;
 
 if ($loggedInUserId) {
-  require 'logic/config.php';
   $movieId = $_GET['id'];
 
   $stmt = $conn->prepare("SELECT rating FROM movie_reviews WHERE user_id = ? AND movie_id = ?");
@@ -253,11 +252,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_watchlist'])) {
               <?php
               require './logic/config.php';
               $movieId = $_GET['id'];
-              $stmt = $conn->prepare("SELECT u.username, r.rating, r.comment, r.created_at 
-                              FROM movie_reviews r 
-                              JOIN user u ON r.user_id = u.id 
-                              WHERE r.movie_id = ? AND r.comment IS NOT NULL AND r.comment != ''
-                              ORDER BY r.created_at DESC");
+              $stmt = $conn->prepare("SELECT r.id, u.username, r.rating, r.comment, r.created_at 
+              FROM movie_reviews r 
+              JOIN user u ON r.user_id = u.id 
+              WHERE r.movie_id = ? AND r.comment IS NOT NULL AND r.comment != ''
+              ORDER BY r.created_at DESC");
 
 
               $stmt->bind_param("i", $movieId);
@@ -265,7 +264,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_watchlist'])) {
               $result = $stmt->get_result();
               if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                  echo "<div class='mb-3'><strong>{$row['username']}</strong> ";
+                  echo "<div class='mb-3' id='comment-{$row['id']}'><strong>{$row['username']}</strong> ";
                   if (!is_null($row['rating'])) {
                     for ($i = 1; $i <= 5; $i++) {
                       if ($i <= $row['rating']) {
@@ -283,6 +282,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_watchlist'])) {
                     echo "<em>{$row['comment']}</em><br>";
                   }
                   echo "<small class='text-secondary'>{$row['created_at']}</small></div><hr style='border-color:#444'>";
+                  if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+                    echo "<button class='delete-comment-btn btn btn-danger btn-sm' data-comment-id='{$row['id']}'>Delete</button>";                 }
+                  
                 }
               } else {
                 echo "<p>Nuk ka asnjë Koment.</p>";
@@ -295,6 +297,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_watchlist'])) {
     </div>
   </div>
 </section>
+<script>
+document.querySelectorAll('.delete-comment-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        if (confirm('Delete this comment?')) {
+            const commentDiv = document.getElementById('comment-' + this.dataset.commentId);
+            fetch('logic/delete_comment.php', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'comment_id=' + this.dataset.commentId
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message);
+                if (data.status === 'success') {
+                    commentDiv.remove();
+                }
+            });
+        }
+    });
+});
+</script>
 
 <script>
   const urlParams = new URLSearchParams(window.location.search);
@@ -517,12 +540,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_watchlist'])) {
       });
   } loadMovieDetails();
 </script>
-
-
-
-
-
-
 
 </body>
 </html>
