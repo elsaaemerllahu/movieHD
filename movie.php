@@ -4,6 +4,7 @@ session_start(); // enable session
 include './logic/config.php'; // your DB connection
 
 $isLoggedIn = isset($_SESSION['user_id']);
+include 'header.php';
 ?>
 
 <?php
@@ -146,9 +147,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_watchlist'])) {
   </style>
 </head>
 <body>
-<?php
-include 'header.php'; // Include the header file
-?>
 <section id="play">
   <div class="clearfix" style="background-color:rgb(0, 0, 0); padding: 50px 0;">
     <div class="container">

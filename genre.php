@@ -1,11 +1,11 @@
-<!-- genre.php -->
+<?php include 'header.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Planet - Genre</title>
+  <title>Zhanra</title>
   <link href="css/bootstrap.min.css" rel="stylesheet" >
   <link href="css/font-awesome.min.css" rel="stylesheet" >
   <link href="css/global.css" rel="stylesheet">
@@ -14,8 +14,6 @@
   <script src="js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<?php include 'header.php'; ?>
-
 <?php
   // Get genre ID and title from URL
   $genreId = isset($_GET['genre']) ? $_GET['genre'] : '28'; // Default: Action
@@ -24,16 +22,16 @@
 
 <section class="pt-4 pb-5" style="background-color:rgb(0, 0, 0);">
   <div class="container">
-    <h2 style="color:white;">Most Popular <?php echo htmlspecialchars($genreTitle); ?> Movies</h2>
+    <h2 style="color:white;">Filmat '<?php echo htmlspecialchars($genreTitle); ?>'</h2>
     <div class="row mt-4" id="genreMovies">
       <!-- Movies will be inserted here -->
     </div>
     <div class="text-center mt-4">
     <<div class="text-center mt-4">
-  <button id="loadMoreBtn" class="btn btn-primary">Load More</button>
+  <button id="loadMoreBtn" class="btn btn-primary">Shiko me shume</button>
   <div id="loadingIndicator" class="mt-3 d-none">
     <div class="spinner-border text-primary" role="status"></div>
-    <div class="text-white mt-2">Loading movies...</div>
+    <div class="text-white mt-2">Duke ngarkuar filmat...</div>
   </div>
 </div>
 
@@ -97,7 +95,7 @@ async function loadGenreMovies(page) {
     }
 
   } catch (error) {
-    console.error('Error loading movies:', error);
+    console.error('Gabim gjate ngarkimit te filmave:', error);
     btn.classList.remove('d-none');
   } finally {
     loader.classList.add('d-none');

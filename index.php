@@ -1,20 +1,22 @@
+<?php include 'header.php';?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Planet</title>
+	<title>MovieHD</title>
+
 	<link href="css/bootstrap.min.css" rel="stylesheet" >
 	<link href="css/font-awesome.min.css" rel="stylesheet" >
 	<link href="css/global.css" rel="stylesheet">
 	<link href="css/index.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Rajdhani&display=swap" rel="stylesheet">
+
 	<script src="js/bootstrap.bundle.min.js"></script>
 
 </head>
 <body style="background-color:rgb(0, 0, 0);">
-<?php include 'header.php'; ?>
 <section id="center" class="center_home">
 	<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
 	  <div class="carousel-indicators" id="carouselIndicators"></div>
@@ -36,12 +38,12 @@
 	  <div class="row trend_1">
 		<div class="col-md-6 col-6">
 		  <div class="trend_1l" style="color:white">
-			<h4 class="mb-0"><i class="align-middle me-1" ></i> Latest Family Movies</span></h4>
+			<h4 class="mb-0">Filmat më të fundit familjarë</h4>
 		  </div>
 		</div>
 		<div class="col-md-6 col-6">
 		  <div class="trend_1r text-end">
-			<h6 class="mb-0"><a class="button" href="genre.php?genre=10751&title=Family">View All</a></h6>
+			<h6 class="mb-0"><a class="button" href="genre.php?genre=10751&title=Family">Shiko të gjitha</a></h6>
 		  </div>
 		</div>
 	  </div>
@@ -58,12 +60,12 @@
 	  <div class="row trend_1">
 		<div class="col-md-6 col-6">
 		  <div class="trend_1l" style="color:white">
-			<h4 class="mb-0"><i class="align-middle col_red me-1"></i> Latest Drama Movies</span></h4>
+			<h4 class="mb-0"> Filmat më të fundit dramë</h4>
 		  </div>
 		</div>
 		<div class="col-md-6 col-6">
 		  <div class="trend_1r text-end">
-			<h6 class="mb-0"><a class="button" href="genre.php?genre=18&title=Drama">View All</a></h6>
+			<h6 class="mb-0"><a class="button" href="genre.php?genre=18&title=Drama">Shiko të gjitha</a></h6>
 		  </div>
 		</div>
 	  </div>
@@ -80,12 +82,12 @@
 	  <div class="row trend_1">
 		<div class="col-md-6 col-6">
 		  <div class="trend_1l" style="color:white">
-			<h4 class="mb-0"><i class="align-middle col_red me-1"></i> Latest Action Movies</span></h4>
+			<h4 class="mb-0">Filmat më të fundit aksion</h4>
 		  </div>
 		</div>
 		<div class="col-md-6 col-6">
 		  <div class="trend_1r text-end">
-			 <h6 class="mb-0"><a class="button" href="genre.php?genre=28&title=Action">View All</a></h6>
+			 <h6 class="mb-0"><a class="button" href="genre.php?genre=28&title=Action">Shiko të gjitha</a></h6>
 		  </div>
 		</div>
 	  </div>
@@ -102,12 +104,12 @@
 	  <div class="row trend_1" style="color:white">
 		<div class="col-md-6 col-6">
 		  <div class="trend_1l">
-			<h4 class="mb-0"><i class="align-middle col_red me-1"></i> Latest Mystery Movies</span></h4>
+			<h4 class="mb-0">Filmat më të fundit mister</h4>
 		  </div>
 		</div>
 		<div class="col-md-6 col-6">
 		  <div class="trend_1r text-end">
-			 <h6 class="mb-0"><a class="button" href="genre.php?genre=9648&title=Mystery">View All</a></h6>
+			 <h6 class="mb-0"><a class="button" href="genre.php?genre=9648&title=Mystery">Shiko të gjitha</a></h6>
 		  </div>
 		</div>
 	  </div>
@@ -135,20 +137,20 @@
 			<div class="col-md-8 p-0">
 			<div class="play2r bg_grey p-4">
 				<h5 style="color:rgb(219, 219, 219); font-size: 24px; font-weight: bold;">
-				<span class="col_red">BEST MOVIE OF THE MONTH :</span> <br> <br>
-				<span id="movieTitle">Loading...</span> <br><br>
+				<span class="col_red">FILMI MË I MIRË I MUAJIT: </span> <br> <br>
+				<span id="movieTitle">Duke u ngarkuar...</span> <br><br>
 				</h5>
-				<h5 class="mt-3" id="movieGenre" style="color:rgb(219, 219, 219);">Genre</h5>
+				<h5 class="mt-3" id="movieGenre" style="color:rgb(219, 219, 219);">Zhanri</h5>
 				<hr class="line">
-				<p class="mt-3" id="movieOverview">Loading description...</p> <br>
+				<p class="mt-3" id="movieOverview">Duke ngarkuar përshkrimin...</p> <br>
 				<div class="play2ri row mt-4">
 				<div class="col-md-6" sty>
 					<div class="play2ril" style="color:rgb(219, 219, 219);">
-					<h6 class="fw-normal">Running Time: <span class="pull-right" id="movieRuntime">...</span></h6>
+					<h6 class="fw-normal">Kohëzgjatja: <span class="pull-right" id="movieRuntime">...</span></h6>
 					<hr class="hr_1">
-					<h6 class="fw-normal">Genre: <span class="pull-right" id="genreList">...</span></h6>
+					<h6 class="fw-normal">Zhanri: <span class="pull-right" id="genreList">...</span></h6>
 					<hr class="hr_1">
-					<h6 class="fw-normal">Release Date: <span class="pull-right" id="releaseDate">...</span></h6>
+					<h6 class="fw-normal">Data e publikimit: <span class="pull-right" id="releaseDate">...</span></h6>
 					<hr class="hr_1 mb-0">
 					</div>
 				</div>
@@ -220,15 +222,15 @@ function myFunction() {
           <span class="col_red me-3">
             ${'★'.repeat(Math.round(movie.vote_average / 2)) + '☆'.repeat(5 - Math.round(movie.vote_average / 2))}
           </span>
-          ${movie.vote_average.toFixed(1)} (TMDB) &nbsp;&nbsp; Year: ${movie.release_date.split('-')[0]}
-          <a class="bg_red p-2 pe-4 ps-4 ms-3 text-white d-inline-block" href="#">Popular</a>
+          ${movie.vote_average.toFixed(1)} (TMDB) &nbsp;&nbsp; Viti: ${movie.release_date.split('-')[0]}
+          <a class="bg_red p-2 pe-4 ps-4 ms-3 text-white d-inline-block" href="#">Të njohura</a>
         </h6>
         
         <p class="mt-3">${movie.overview}</p>
         
         <h6 class="mt-4">
           <a class="button" href="https://www.youtube.com/results?search_query=${encodeURIComponent(movie.title)} trailer" target="_blank">
-            <i class="fa fa-play-circle align-middle me-1"></i> Watch Trailer</a>
+            <i class="fa fa-play-circle align-middle me-1"></i>Shiko Trailer</a>
         </h6>
       </div>
 

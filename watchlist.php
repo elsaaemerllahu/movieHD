@@ -6,6 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: ./logic/login.php");
     exit();
 }
+include 'header.php';
 
 $userId = $_SESSION['user_id'];
 $sql = "SELECT * FROM watchlist WHERE user_id = ? ORDER BY id DESC";
@@ -33,9 +34,6 @@ $watchlist = $result->fetch_all(MYSQLI_ASSOC);
 
 </head>
 <body style="background-color:rgb(0, 0, 0);">
-
-<?php include 'header.php'; ?>
-
 
 <section id="trend" class="pt-4 pb-5">
     <div class="container">
