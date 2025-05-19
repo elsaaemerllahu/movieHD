@@ -88,9 +88,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle <?= $currentPage == 'profil.php' ? 'active text-danger' : '' ?>" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-user"></i></a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+              <ul class="dropdown-menu drop_1" aria-labelledby="profileDropdown">
                 <li><a class="dropdown-item <?= $currentPage == 'profil.php' ? 'text-danger fw-bold' : '' ?>" href="profil.php">Profili</a></li>
-                <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="login.php">Çkyçu</a></li>
               </ul>
           </li>

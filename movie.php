@@ -206,7 +206,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_watchlist'])) {
 
                         <input type="hidden" name="genre" id="formGenre" value="<?php echo htmlspecialchars($movieGenre); ?>">
                         <input type="hidden" name="release_date" id="formReleaseDate" value="<?php echo htmlspecialchars($movieReleaseDate); ?>">
-                        <button type="submit" class="btn btn-warning">Add to Watchlist</button>
+                        <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-plus me-2"></i> Për t'u parë</button>
                       </form>
                       
                     <?php else: ?>
@@ -226,22 +226,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_watchlist'])) {
           </div>
         </div>
       </div> 
-      <div class="bg_grey mt-4 p-4 text-white" style="border-radius: 8px;">
-        <h6 class="mb-2">Leave a Rating & Comment</h6>
-        <form id="reviewForm">
-          <input type="hidden" name="movie_id" id="reviewMovieId">
-          <div class="mb-2">
-            <span class="star" data-value="1">&#9733;</span>
-            <span class="star" data-value="2">&#9733;</span>
-            <span class="star" data-value="3">&#9733;</span>
-            <span class="star" data-value="4">&#9733;</span>
-            <span class="star" data-value="5">&#9733;</span>
-          </div>
-          <input type="hidden" name="rating" id="ratingValue">
-          <textarea class="form-control mb-2" name="comment" placeholder="Leave a comment (optional)" rows="2" style="resize: none;"></textarea>
-          <button type="submit" class="btn btn-danger">Submit</button>
-        </form>
-      </div>
+      <?php if ($isLoggedIn): ?>
+        <div class="bg_grey mt-4 p-4 text-white" style="border-radius: 8px;">
+          <h6 class="mb-2">Shkruaj një Koment</h6>
+          <form id="reviewForm">
+            <input type="hidden" name="movie_id" id="reviewMovieId">
+            <div class="mb-2">
+              <span class="star" data-value="1">&#9733;</span>
+              <span class="star" data-value="2">&#9733;</span>
+              <span class="star" data-value="3">&#9733;</span>
+              <span class="star" data-value="4">&#9733;</span>
+              <span class="star" data-value="5">&#9733;</span>
+            </div>
+            <input type="hidden" name="rating" id="ratingValue">
+            <textarea class="form-control mb-2" name="comment" placeholder="" rows="2" style="resize: none;"></textarea>
+            <button type="submit" class="btn btn-danger">Dergo</button>
+          </form>
+        </div>
+      <?php endif; ?>
 
       <div class="bg_grey mt-4 p-4" style="border-radius: 8px;">
 
@@ -249,7 +251,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_watchlist'])) {
           <div class="row">
             
             <div class="col-md-12 text-white">
-              <h6 class="mb-2">User Ratings & Comments</h6>
+              <h6 class="mb-2">Vlersime dhe Komente</h6>
               <?php
               require './logic/config.php';
               $movieId = $_GET['id'];
@@ -285,7 +287,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_watchlist'])) {
                   echo "<small class='text-secondary'>{$row['created_at']}</small></div><hr style='border-color:#444'>";
                 }
               } else {
-                echo "<p>No reviews yet.</p>";
+                echo "<p>Nuk ka asnjë Koment.</p>";
               }
               ?>
             </div>

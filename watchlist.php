@@ -3,7 +3,7 @@ session_start();
 require_once "./logic/config.php";
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ./logic/login.php");
+    header("Location:login.php");
     exit();
 }
 include 'header.php';
@@ -52,7 +52,7 @@ $watchlist = $result->fetch_all(MYSQLI_ASSOC);
         <div class="row mt-4" id="familyMovies">
             <?php if (empty($watchlist)): ?>
                 <div class="col-12">
-                    <p class="text-center text-muted">Your watchlist is empty.</p>
+                    <p class="text-center text-muted">Nuk ka asnjë film në listë.</p>
                 </div>
             <?php else: ?>
                 <?php foreach ($watchlist as $movie): ?>
@@ -71,7 +71,7 @@ $watchlist = $result->fetch_all(MYSQLI_ASSOC);
                                     </a>
                                 </h6>
                                 <a href="remove_from_watchlist.php?movie_id=<?= $movie['movie_id'] ?>" class="btn btn-danger">
-                                     Remove
+                                     Fshij
                                 </a>
                             </div>
                             </div>
