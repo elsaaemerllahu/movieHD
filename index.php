@@ -35,8 +35,8 @@
 	<div class="container">
 	  <div class="row trend_1">
 		<div class="col-md-6 col-6">
-		  <div class="trend_1l">
-			<h4 class="mb-0"><i class="fa fa-youtube-play align-middle col_red me-1"></i> Latest <span class="col_red">Family Movies</span></h4>
+		  <div class="trend_1l" style="color:white">
+			<h4 class="mb-0"><i class="align-middle me-1" ></i> Latest Family Movies</span></h4>
 		  </div>
 		</div>
 		<div class="col-md-6 col-6">
@@ -57,8 +57,8 @@
 	<div class="container">
 	  <div class="row trend_1">
 		<div class="col-md-6 col-6">
-		  <div class="trend_1l">
-			<h4 class="mb-0"><i class="fa fa-youtube-play align-middle col_red me-1"></i> Latest <span class="col_red">Drama Movies</span></h4>
+		  <div class="trend_1l" style="color:white">
+			<h4 class="mb-0"><i class="align-middle col_red me-1"></i> Latest Drama Movies</span></h4>
 		  </div>
 		</div>
 		<div class="col-md-6 col-6">
@@ -79,8 +79,8 @@
 	<div class="container">
 	  <div class="row trend_1">
 		<div class="col-md-6 col-6">
-		  <div class="trend_1l">
-			<h4 class="mb-0"><i class="fa fa-youtube-play align-middle col_red me-1"></i> Latest <span class="col_red">Action Movies</span></h4>
+		  <div class="trend_1l" style="color:white">
+			<h4 class="mb-0"><i class="align-middle col_red me-1"></i> Latest Action Movies</span></h4>
 		  </div>
 		</div>
 		<div class="col-md-6 col-6">
@@ -99,10 +99,10 @@
   
   <section id="trend" class="pt-4 pb-5">
 	<div class="container">
-	  <div class="row trend_1">
+	  <div class="row trend_1" style="color:white">
 		<div class="col-md-6 col-6">
 		  <div class="trend_1l">
-			<h4 class="mb-0"><i class="fa fa-youtube-play align-middle col_red me-1"></i> Latest <span class="col_red">Mystery Movies</span></h4>
+			<h4 class="mb-0"><i class="align-middle col_red me-1"></i> Latest Mystery Movies</span></h4>
 		  </div>
 		</div>
 		<div class="col-md-6 col-6">
@@ -127,7 +127,7 @@
 			<div class="play2l">
 				<div class="grid clearfix">
 				<figure class="effect-jazz mb-0">
-					<a href="#"><img id="moviePoster" src="" height="515" class="w-100" alt="Best Movie"></a>
+					<img id="moviePoster" src="" height="515" class="w-100" alt="Best Movie">
 				</figure>
 				</div>
 			</div>
@@ -339,7 +339,7 @@ async function loadActionMovies() {
           <div class="trend_2im1 clearfix">
             <div class="grid">
               <figure class="effect-jazz mb-0">
-                <a href="#"><img src="${IMAGE_BASE_URL}${movie.poster_path}" class="w-100" alt="${movie.title}"></a>
+                <a href="movie.php?id=${movie.id}"><img src="${IMAGE_BASE_URL}${movie.poster_path}" class="w-100" alt="${movie.title}"></a>
               </figure>
             </div>
           </div>
@@ -378,7 +378,7 @@ async function loadMysteryMovies() {
           <div class="trend_2im1 clearfix">
             <div class="grid">
               <figure class="effect-jazz mb-0">
-                <a href="#"><img src="${IMAGE_BASE_URL}${movie.poster_path}" class="w-100" alt="${movie.title}"></a>
+                <a href="movie.php?id=${movie.id}"><img src="${IMAGE_BASE_URL}${movie.poster_path}" class="w-100" alt="${movie.title}"></a>
               </figure>
             </div>
           </div>
