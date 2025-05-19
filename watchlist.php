@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once "logic/config.php";
+require_once "./logic/config.php";
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: ./logic/login.php");
     exit();
 }
 
