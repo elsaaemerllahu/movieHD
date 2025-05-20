@@ -266,7 +266,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_watchlist'])) {
               $result = $stmt->get_result();
               if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                  echo "<div class='mb-3' id='comment-{$row['id']}'><strong>{$row['username']}</strong> ";
+                  echo "<div class='mb-3 comment-block' id='comment-block-{$row['id']}'>";
+                  echo "<div id='comment-{$row['id']}'><strong>{$row['username']}</strong> ";
                   if (!is_null($row['rating'])) {
                     for ($i = 1; $i <= 5; $i++) {
                       if ($i <= $row['rating']) {
@@ -285,8 +286,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_watchlist'])) {
                   }
                   echo "<small class='text-secondary'>{$row['created_at']}</small></div><hr style='border-color:#444'>";
                   if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
-                    echo "<button class='delete-comment-btn btn btn-danger btn-sm' data-comment-id='{$row['id']}'>Delete</button>";                 }
-                  
+                    echo "<button class='delete-comment-btn btn btn-danger btn-sm' data-comment-id='{$row['id']}'>Delete</button>";
+                  }
+                  echo "</div>";
                 }
               } else {
                 echo "<p>Nuk ka asnjë Koment.</p>";
@@ -303,7 +305,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_watchlist'])) {
 document.querySelectorAll('.delete-comment-btn').forEach(btn => {
     btn.addEventListener('click', function() {
         if (confirm('Delete this comment?')) {
-            const commentDiv = document.getElementById('comment-' + this.dataset.commentId);
+            const commentBlock = document.getElementById('comment-block-' + this.dataset.commentId);
             fetch('logic/delete_comment.php', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -313,7 +315,7 @@ document.querySelectorAll('.delete-comment-btn').forEach(btn => {
             .then(data => {
                 alert(data.message);
                 if (data.status === 'success') {
-                    commentDiv.remove();
+                    commentBlock.remove();
                 }
             });
         }
