@@ -75,8 +75,18 @@ $currentPage = basename($_SERVER['PHP_SELF']);
       <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
         <ul class="navbar-nav mb-0">
           <li class="nav-item"><a class="nav-link <?= $currentPage == 'index.php' ? 'active text-danger' : '' ?>" href="index.php">Ballina</a></li>
-          <li class="nav-item"><a class="nav-link <?= $currentPage == 'watchlist.php' ? 'active text-danger' : '' ?>" href="watchlist.php">Për t'u parë</a></li>
-          <li class="nav-item"><a class="nav-link <?= $currentPage == 'watched.php' ? 'active text-danger' : '' ?>" href="watched.php">Të shikuarat</a></li>
+          <li class="nav-item">
+            <a class="nav-link <?= $currentPage == 'watchlist.php' ? 'active text-danger' : '' ?>"
+               href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../watchlist.php' : 'watchlist.php'; ?>">
+               Për t'u parë
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <?= $currentPage == 'watched.php' ? 'active text-danger' : '' ?>"
+               href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../watched.php' : 'watched.php'; ?>">
+               Të shikuarat
+            </a>
+          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" role="button" data-bs-toggle="dropdown">Zhanre</a>
             <ul class="dropdown-menu drop_1" style="padding: 0;">
