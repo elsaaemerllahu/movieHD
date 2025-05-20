@@ -76,12 +76,11 @@ include 'header.php';
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-start;
-      gap: 15px;
       max-width: 1500px;
       margin: 0 auto;
     }
     .movie-item {
-      flex: 0 0 calc(32% - 10px);
+      flex: 0 0 calc(23% - 5px);
       box-sizing: border-box;
     }
     @media (max-width: 768px) {
@@ -103,7 +102,7 @@ include 'header.php';
       <?php foreach ($movies as $movie): ?>
         <div class="movie-item" id="movie-<?= $movie['id'] ?>">
           <div class="card bg-dark text-white h-100">
-            <img src="<?= htmlspecialchars($movie['movie_poster'] ?? 'default.jpg') ?>" class="card-img-top" alt="Poster" style="height: 600px; object-fit: cover;">
+            <img src="<?= htmlspecialchars($movie['movie_poster'] ?? 'default.jpg') ?>" class="card-img-top" alt="Poster" style="height: 300px; object-fit: cover;">
             <div class="card-body">
               <h5 class="card-title">
                 <a href="movie.php?id=<?= urlencode($movie['movie_id']) ?>" class="text-white text-decoration-none">
@@ -120,7 +119,7 @@ include 'header.php';
               <button class="btn btn-danger mt-auto delete-button"
                       data-id="<?= $movie['id'] ?>"
                       data-movie-container-id="movie-<?= $movie['id'] ?>">
-                Hiqe nga të shikuara
+                Fshij
               </button>
             </div>
           </div>

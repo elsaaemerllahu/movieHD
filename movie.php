@@ -22,7 +22,7 @@ if ($loggedInUserId) {
   $stmt->close();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_watchlist'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_watchlist'])) {
     if (isset($_SESSION['user_id'])) {
         $userId = $_SESSION['user_id'];
         $movieId = $_POST['movie_id'];
@@ -525,6 +525,45 @@ document.querySelectorAll('.delete-comment-btn').forEach(btn => {
     });
   }
 </script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const stars = document.querySelectorAll('.star');
+    const ratingInput = document.getElementById('ratingValue');
+
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        const rating = star.getAttribute('data-value');
+        ratingInput.value = rating;
+
+        // Reset all stars
+        stars.forEach(s => s.style.color = '');
+
+        // Highlight stars up to selected
+        stars.forEach(s => {
+          if (s.getAttribute('data-value') <= rating) {
+            s.style.color = 'gold';
+          }
+        });
+      });
+
+      // Optional: add hover effect
+      star.addEventListener('mouseover', () => {
+        const hoverValue = star.getAttribute('data-value');
+        stars.forEach(s => {
+          s.style.color = (s.getAttribute('data-value') <= hoverValue) ? 'lightgray' : '';
+        });
+      });
+
+      star.addEventListener('mouseout', () => {
+        const currentRating = ratingInput.value;
+        stars.forEach(s => {
+          s.style.color = (s.getAttribute('data-value') <= currentRating) ? 'gold' : '';
+        });
+      });
+    });
+  });
+</script>
+
 
 </body>
 </html>
