@@ -56,5 +56,5 @@ elseif (!empty($comment)) {
     $stmt->close();
 }
 
-echo json_encode(['status' => 'success', 'message' => 'Review processed successfully.']);
+echo json_encode(['status' => 'success', 'message' => 'Vlersimi u shtua me sukses .']);
 ?>

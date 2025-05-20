@@ -25,9 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->bind_param("iissss", $userId, $movieId, $title, $poster, $genre, $releaseDate);
 
     if ($stmt->execute()) {
-        echo json_encode(['status' => 'success', 'message' => 'Movie added to watchlist.']);
+        echo json_encode(['status' => 'success', 'message' => 'Filmi u shtua  ne listen per tu pare.']);
     } else {
-        echo json_encode(['status' => 'error', 'message' => 'Failed to add movie.']);
+        echo json_encode(['status' => 'error', 'message' => 'Filmi nuk u shtua.']);
     }
 
     $stmt->close();
