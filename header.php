@@ -1,12 +1,13 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+  session_start();
 }
 $currentPage = basename($_SERVER['PHP_SELF']);
+$isLogic = strpos($_SERVER['REQUEST_URI'], 'logic/') !== false;
+$basePath = $isLogic ? '../' : '';
 ?>
 
 <!DOCTYPE html>
-
 <html>
 <head>
   <meta charset="utf-8">
@@ -14,8 +15,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
-<link rel="icon" type="image/x-icon" href="/moviehd/favicon.ico">
-
+  <link rel="icon" type="image/x-icon" href="/moviehd/favicon.ico">
   <style>
     #header .nav-link {
       font-size: 22px;
@@ -40,15 +40,15 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <div class="col-md-3">
           <div class="top_1l pt-1">
             <h3 class="mb-0">
-              <a class="text-white" href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../index.php' : 'index.php'; ?>" style="text-decoration: none;">
-                <img src="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../img/movie.png' : 'img/movie.png'; ?>" alt="Logo" style="width: 40px;" class="me-1"> MovieHD
+              <a class="text-white" href="<?= $basePath ?>index.php" style="text-decoration: none;">
+                <img src="<?= $basePath ?>img/movie.png" alt="Logo" style="width: 40px;" class="me-1"> MovieHD
               </a>
             </h3>
           </div>
         </div>
         <div class="col-md-3 text-md-right">
           <div class="top_1m">
-            <form action="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../search.php' : 'search.php'; ?>" method="get">
+            <form action="<?= $basePath ?>search.php" method="get">
               <div class="input-group">
                 <input type="text" class="form-control bg-black text-white" name="term" placeholder="Search Site..." required>
                 <div class="input-group-append">
@@ -66,7 +66,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     <nav class="navbar navbar-expand-md navbar-light" id="navbar_sticky">
       <div class="container d-flex justify-content-between align-items-center" style="max-width: 1140px;">
         <!-- Logo -->
-        <a class="navbar-brand text-white fw-bold" href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../index.php' : 'index.php'; ?>">
+        <a class="navbar-brand text-white fw-bold" href="<?= $basePath ?>index.php">
           <i class="fa fa-video-camera col_red me-1"></i> MovieHD
         </a>
         <!-- Toggle button -->
@@ -74,60 +74,54 @@ $currentPage = basename($_SERVER['PHP_SELF']);
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="color: white;">
           <i class="fa fa-bars"></i>
         </button>
-
-
-      <!-- Navigation menu -->
-      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-        <ul class="navbar-nav mb-0">
-          <li class="nav-item"><a class="nav-link <?= $currentPage == 'index.php' ? 'active text-danger' : '' ?>" href="index.php">Ballina</a></li>
-          <?php if (isset($_SESSION['username'])): ?>
-  <li class="nav-item">
-    <a class="nav-link <?= $currentPage == 'watchlist.php' ? 'active text-danger' : '' ?>"
-       href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../watchlist.php' : 'watchlist.php'; ?>">
-       Për t'u parë
-    </a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link <?= $currentPage == 'watched.php' ? 'active text-danger' : '' ?>"
-       href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../watched.php' : 'watched.php'; ?>">
-       Të shikuarat
-    </a>
-  </li>
-<?php endif; ?>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" role="button" data-bs-toggle="dropdown">Zhanre</a>
-            <ul class="dropdown-menu drop_1" style="padding: 0;">
-              <li><a class="dropdown-item" href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../genre.php?genre=10751&title=Family' : 'genre.php?genre=10751&title=Family'; ?>">Familjarë</a></li>
-              <li><a class="dropdown-item" href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../genre.php?genre=28&title=Action' : 'genre.php?genre=28&title=Action'; ?>">Aksion</a></li>
-              <li><a class="dropdown-item" href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../genre.php?genre=9648&title=Mystery' : 'genre.php?genre=9648&title=Mystery'; ?>">Mister</a></li>
-              <li><a class="dropdown-item" href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../genre.php?genre=18&title=Drama' : 'genre.php?genre=18&title=Drama'; ?>">Drama</a></li>
-            </ul>
-          </li>
-          <?php if (isset($_SESSION['username'])): ?>
-  <!-- User is logged in -->
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle <?= $currentPage == 'profil.php' ? 'active text-danger' : '' ?>" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <i class="fa fa-user"></i>
-    </a>
-    <ul class="dropdown-menu drop_1" aria-labelledby="profileDropdown">
-      <li><a class="dropdown-item <?= $currentPage == 'profil.php' ? 'text-danger fw-bold' : '' ?>" href="profil.php">Profili</a></li>
-      <li><a class="dropdown-item" href="logic/logout.php">Çkyçu</a></li>
-    </ul>
-  </li>
-<?php else: ?>
-  <!-- User is not logged in -->
-  <li class="nav-item">
-    <a class="nav-link <?= $currentPage == 'login.php' ? 'active text-danger' : '' ?>" href="login.php">
-      <i class="fa fa-sign-in"></i> Kyçu
-    </a>
-  </li>
-<?php endif; ?>
-
-          <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-              <li class="nav-item"><a class="nav-link" href="logic/admin_users.php">Users</a></li>
-          <?php endif; ?>
-        </ul>
+        <!-- Navigation menu -->
+        <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+          <ul class="navbar-nav mb-0">
+            <li class="nav-item">
+              <a class="nav-link <?= $currentPage == 'index.php' ? 'active text-danger' : '' ?>" href="<?= $basePath ?>index.php">Ballina</a>
+            </li>
+            <?php if (isset($_SESSION['username'])): ?>
+              <li class="nav-item">
+                <a class="nav-link <?= $currentPage == 'watchlist.php' ? 'active text-danger' : '' ?>" href="<?= $basePath ?>watchlist.php">Për t'u parë</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <?= $currentPage == 'watched.php' ? 'active text-danger' : '' ?>" href="<?= $basePath ?>watched.php">Të shikuarat</a>
+              </li>
+            <?php endif; ?>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" role="button" data-bs-toggle="dropdown">Zhanre</a>
+              <ul class="dropdown-menu drop_1" style="padding: 0;">
+                <li><a class="dropdown-item" href="<?= $basePath ?>genre.php?genre=10751&title=Family">Familjarë</a></li>
+                <li><a class="dropdown-item" href="<?= $basePath ?>genre.php?genre=28&title=Action">Aksion</a></li>
+                <li><a class="dropdown-item" href="<?= $basePath ?>genre.php?genre=9648&title=Mystery">Mister</a></li>
+                <li><a class="dropdown-item" href="<?= $basePath ?>genre.php?genre=18&title=Drama">Drama</a></li>
+              </ul>
+            </li>
+            <?php if (isset($_SESSION['username'])): ?>
+              <!-- User is logged in -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle <?= $currentPage == 'profil.php' ? 'active text-danger' : '' ?>" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa fa-user"></i>
+                </a>
+                <ul class="dropdown-menu drop_1" aria-labelledby="profileDropdown">
+                  <li><a class="dropdown-item <?= $currentPage == 'profil.php' ? 'text-danger fw-bold' : '' ?>" href="<?= $basePath ?>profil.php">Profili</a></li>
+                  <li><a class="dropdown-item" href="<?= $basePath ?>logic/logout.php">Çkyçu</a></li>
+                </ul>
+              </li>
+            <?php else: ?>
+              <!-- User is not logged in -->
+              <li class="nav-item">
+                <a class="nav-link <?= $currentPage == 'login.php' ? 'active text-danger' : '' ?>" href="<?= $basePath ?>login.php">
+                  <i class="fa fa-sign-in"></i> Kyçu
+                </a>
+              </li>
+            <?php endif; ?>
+            
+            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+              <li class="nav-item"><a class="nav-link" href="<?= $basePath ?>logic/admin_users.php">Users</a></li>
+            <?php endif; ?>
+          </ul>
+        </div>
       </div>
     </nav>
   </section>
