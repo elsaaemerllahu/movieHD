@@ -562,6 +562,14 @@ document.querySelectorAll('.delete-comment-btn').forEach(btn => {
       });
     });
   });
+
+  document.addEventListener('DOMContentLoaded', () => {
+  const reviewMovieIdInput = document.getElementById('reviewMovieId');
+  if (reviewMovieIdInput && movieId) {
+    reviewMovieIdInput.value = movieId;
+  }
+});
+
 </script>
 
 
