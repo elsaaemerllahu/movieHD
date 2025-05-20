@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php include '../header.php'; ?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,7 +15,7 @@
 </head>
 <body style="background-color:rgb(0, 0, 0);">
 
-<?php include '../header.php'; ?>
+
 
 
 <section id="trend" class="pt-4 pb-5">
@@ -89,7 +89,4 @@
 </section>
 
 <?php include '../footer.php'; ?>
-
-</body>
-</html>
 
