@@ -56,7 +56,7 @@
                     echo "</div>";
                     // Movie info
                     echo "<div class='movie-info'>";
-                    echo "<h3><a href='../movie.php?id=" . $movie['id'] . "'>" . htmlspecialchars($movie['title']) . "</a></h3>";
+                    echo "<h3><a href='movie.php?id=" . $movie['id'] . "'>" . htmlspecialchars($movie['title']) . "</a></h3>";
                     // Truncate overview to 100 characters
                     $overview = strlen($movie['overview']) > 100 ? substr($movie['overview'], 0, 97) . '...' : $movie['overview'];
                     echo "<p>" . htmlspecialchars($overview) . "</p>";
