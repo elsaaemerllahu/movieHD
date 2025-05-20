@@ -43,7 +43,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         </div>
         <div class="col-md-3 text-md-right">
           <div class="top_1m">
-            <form action="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? 'search.php' : 'logic/search.php'; ?>" method="get">
+            <form action="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../search.php' : 'search.php'; ?>" method="get">
               <div class="input-group">
                 <input type="text" class="form-control bg-black text-white" name="term" placeholder="Search Site..." required>
                 <div class="input-group-append">
