@@ -49,7 +49,7 @@ session_destroy();
     </div>
     <script>
         setTimeout(function() {
-            alert("U çkyçët me sukses!");
+            
             window.location.href = "../login.php";
         }, 500);
     </script>

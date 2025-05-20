@@ -1,7 +1,12 @@
-<!DOCTYPE html>
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 $currentPage = basename($_SERVER['PHP_SELF']);
 ?>
+
+<!DOCTYPE html>
+
 <html>
 <head>
   <meta charset="utf-8">
@@ -75,18 +80,21 @@ $currentPage = basename($_SERVER['PHP_SELF']);
       <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
         <ul class="navbar-nav mb-0">
           <li class="nav-item"><a class="nav-link <?= $currentPage == 'index.php' ? 'active text-danger' : '' ?>" href="index.php">Ballina</a></li>
-          <li class="nav-item">
-            <a class="nav-link <?= $currentPage == 'watchlist.php' ? 'active text-danger' : '' ?>"
-               href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../watchlist.php' : 'watchlist.php'; ?>">
-               Për t'u parë
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link <?= $currentPage == 'watched.php' ? 'active text-danger' : '' ?>"
-               href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../watched.php' : 'watched.php'; ?>">
-               Të shikuarat
-            </a>
-          </li>
+          <?php if (isset($_SESSION['username'])): ?>
+  <li class="nav-item">
+    <a class="nav-link <?= $currentPage == 'watchlist.php' ? 'active text-danger' : '' ?>"
+       href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../watchlist.php' : 'watchlist.php'; ?>">
+       Për t'u parë
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link <?= $currentPage == 'watched.php' ? 'active text-danger' : '' ?>"
+       href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../watched.php' : 'watched.php'; ?>">
+       Të shikuarat
+    </a>
+  </li>
+<?php endif; ?>
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" role="button" data-bs-toggle="dropdown">Zhanre</a>
             <ul class="dropdown-menu drop_1" style="padding: 0;">
@@ -96,13 +104,26 @@ $currentPage = basename($_SERVER['PHP_SELF']);
               <li><a class="dropdown-item" href="<?php echo (strpos($_SERVER['REQUEST_URI'], 'logic/') !== false) ? '../genre.php?genre=18&title=Drama' : 'genre.php?genre=18&title=Drama'; ?>">Drama</a></li>
             </ul>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle <?= $currentPage == 'profil.php' ? 'active text-danger' : '' ?>" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-user"></i></a>
-              <ul class="dropdown-menu drop_1" aria-labelledby="profileDropdown">
-                <li><a class="dropdown-item <?= $currentPage == 'profil.php' ? 'text-danger fw-bold' : '' ?>" href="profil.php">Profili</a></li>
-                <li><a class="dropdown-item" href="logic/logout.php">Çkyçu</a></li>
-              </ul>
-          </li>
+          <?php if (isset($_SESSION['username'])): ?>
+  <!-- User is logged in -->
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle <?= $currentPage == 'profil.php' ? 'active text-danger' : '' ?>" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fa fa-user"></i>
+    </a>
+    <ul class="dropdown-menu drop_1" aria-labelledby="profileDropdown">
+      <li><a class="dropdown-item <?= $currentPage == 'profil.php' ? 'text-danger fw-bold' : '' ?>" href="profil.php">Profili</a></li>
+      <li><a class="dropdown-item" href="logic/logout.php">Çkyçu</a></li>
+    </ul>
+  </li>
+<?php else: ?>
+  <!-- User is not logged in -->
+  <li class="nav-item">
+    <a class="nav-link <?= $currentPage == 'login.php' ? 'active text-danger' : '' ?>" href="login.php">
+      <i class="fa fa-sign-in"></i> Kyçu
+    </a>
+  </li>
+<?php endif; ?>
+
           <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
               <li class="nav-item"><a class="nav-link" href="logic/admin_users.php">Users</a></li>
           <?php endif; ?>

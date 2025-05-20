@@ -208,10 +208,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_watchlist'])) {
                         <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-plus me-2"></i> Për t'u parë</button>
                       </form>
                       
-                    <?php else: ?>
-                      <div class="alert alert-warning text-center w-100">
-                        Please log in to add movies to your watchlist or mark them as watched.
-                      </div>
+                    
                     <?php endif; ?>
                   </div>
 
