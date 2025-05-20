@@ -454,6 +454,8 @@ document.querySelectorAll('.delete-comment-btn').forEach(btn => {
       document.getElementById('formPosterPath').value = movie.poster_path;
       document.getElementById('formGenre').value = genres;
       document.getElementById('formReleaseDate').value = movie.release_date;
+      document.getElementById('formMovieTitle').value = movie.title;
+      document.getElementById('formMoviePoster').value = IMAGE_BASE_URL + movie.poster_path;
       } catch (err) {
         console.error('Error fetching movie:', err);
       }
