@@ -376,54 +376,111 @@ document.querySelectorAll('.delete-comment-btn').forEach(btn => {
     }, 4000);
   }
 
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
 
-    const formData = new FormData(form);
+      const formData = new FormData(form);
 
-    try {
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: formData
-      });
-      const data = await response.json();
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData
+        });
+        const data = await response.json();
 
-      if (data.success) {
-        showAlert(data.message, 'success');
-      } else {
-        showAlert(data.message, 'warning');
+        if (data.success) {
+          showAlert(data.message, 'success');
+        } else {
+          showAlert(data.message, 'warning');
+        }
+      } catch (error) {
+        showAlert('Something went wrong. Please try again.', 'danger');
+        console.error(error);
       }
-    } catch (error) {
-      showAlert('Something went wrong. Please try again.', 'danger');
-      console.error(error);
-    }
-  });
+    });
+  }
 
     document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('watchedForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+      // Always run this for everyone
+      loadMovieDetails();
 
-        const formData = new FormData(this);
+      // Only add event listener if the form exists (for logged-in users)
+      const watchedForm = document.getElementById('watchedForm');
+      if (watchedForm) {
+        watchedForm.addEventListener('submit', function(e) {
+          e.preventDefault();
 
-        fetch('add_to_watched.php', {
-          method: 'POST',
-          body: formData,
-        })
-        .then(response => response.json())
-        .then(data => {
-          const feedback = document.getElementById('watchedFeedback');
-          if (data.success) {
-            feedback.style.color = 'limegreen';
-            feedback.textContent = data.message;
-          } else {
-            feedback.style.color = 'orange';
-            feedback.textContent = data.message;
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
+          const formData = new FormData(this);
+
+          fetch('add_to_watched.php', {
+            method: 'POST',
+            body: formData,
+          })
+          .then(response => response.json())
+          .then(data => {
+            const feedback = document.getElementById('watchedFeedback');
+            if (data.success) {
+              feedback.style.color = 'limegreen';
+              feedback.textContent = data.message;
+            } else {
+              feedback.style.color = 'orange';
+              feedback.textContent = data.message;
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
         });
-      });
+      }
+
+      const reviewForm = document.getElementById('reviewForm');
+      if (reviewForm) {
+        reviewForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const formData = new FormData(this);
+
+          fetch('submit_review.php', {
+            method: 'POST',
+            body: formData
+          }).then(res => res.json())
+          .then(data => {
+            if (data.status === 'success') {
+              alert('✔️ ' + data.message);
+              location.reload(); // Refresh to show the new comment
+            } else {
+              alert('⚠️ ' + data.message);
+            }
+          });
+        });
+      }
+
+      const watchlistForm = document.getElementById('watchlistForm');
+      if (watchlistForm) {
+        watchlistForm.addEventListener('submit', function(e) {
+          e.preventDefault(); // Prevent default form submission
+
+          const form = e.target;
+          const formData = new FormData(form);
+
+          fetch('add_to_watchlist.php', {
+              method: 'POST',
+              body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.status === 'success') {
+                  alert('✔️ ' + data.message);
+              } else {
+                  alert('⚠️ ' + data.message);
+              }
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              alert('❌ Something went wrong.');
+          });
+        });
+      }
     });
 
   async function loadMovieDetails() {
@@ -458,90 +515,15 @@ document.querySelectorAll('.delete-comment-btn').forEach(btn => {
       }
   }
 
-  document.getElementById('watchlistForm').addEventListener('submit', function(e) {
-      e.preventDefault(); // Prevent default form submission
+  const userRating = <?php echo json_encode($movieRating); ?>;
 
-      const form = e.target;
-      const formData = new FormData(form);
-
-      fetch('add_to_watchlist.php', {
-          method: 'POST',
-          body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-          if (data.status === 'success') {
-              alert('✔️ ' + data.message);
-          } else {
-              alert('⚠️ ' + data.message);
-          }
-      })
-      .catch(error => {
-          console.error('Error:', error);
-          alert('❌ Something went wrong.');
-      });
-  });
-
-  document.getElementById('reviewMovieId').value = movieId;
-
+  if (userRating > 0) {
     const stars = document.querySelectorAll('.star');
-    stars.forEach(star => {
-      star.addEventListener('click', () => {
-        const value = star.getAttribute('data-value');
-        document.getElementById('ratingValue').value = value;
-
-        // Visual feedback
-        stars.forEach(s => s.style.color = "#fff");
-        for (let i = 0; i < value; i++) {
-          stars[i].style.color = "#e50914";
-        }
-      });
+    document.getElementById('ratingValue').value = userRating;
+    stars.forEach((s, index) => {
+      s.style.color = (index < userRating) ? '#e50914' : '#fff';
     });
-
-  document.getElementById('reviewForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-
-    fetch('submit_review.php', {
-      method: 'POST',
-      body: formData
-    }).then(res => res.json())
-    .then(data => {
-      if (data.status === 'success') {
-        alert('✔️ ' + data.message);
-        location.reload(); // Refresh to show the new comment
-      } else {
-        alert('⚠️ ' + data.message);
-      }
-    });
-  });
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const movieData = {
-      id: new URLSearchParams(window.location.search).get('id'),
-      title: document.getElementById("movieTitle").textContent,
-      poster: document.getElementById("moviePoster").getAttribute("src"),
-      genre: document.getElementById("genreList").textContent,
-      release: document.getElementById("releaseDate").textContent
-    };
-
-    // Fill Watchlist form
-    document.getElementById("formMovieId").value = movieData.id;
-    document.getElementById("formTitle").value = movieData.title;
-    document.getElementById("formPosterPath").value = movieData.poster;
-    document.getElementById("formGenre").value = movieData.genre;
-    document.getElementById("formReleaseDate").value = movieData.release;
-    });
-
-    const userRating = <?php echo json_encode($movieRating); ?>;
-
-    if (userRating > 0) {
-      const stars = document.querySelectorAll('.star');
-      document.getElementById('ratingValue').value = userRating;
-      stars.forEach((s, index) => {
-        s.style.color = (index < userRating) ? '#e50914' : '#fff';
-      });
-  } loadMovieDetails();
+  }
 </script>
 
 </body>
