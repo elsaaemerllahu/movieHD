@@ -165,27 +165,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_watchlist'])) 
         <div class="col-md-8 p-0">
           <div class="play2r bg_grey p-4">
             <h5 style="color:rgb(219, 219, 219); font-size: 24px; font-weight: bold;">
-              <span class="col_red">MOVIE DETAILS:</span> <br><br>
-              <span id="movieTitle">Loading...</span> <br><br>
+              <span class="col_red">Detajet e filmit:</span> <br><br>
+              <span id="movieTitle">Duke u ngarkuar...</span> <br><br>
             </h5>
             <h5 class="mt-3" id="movieGenre" style="color:rgb(219, 219, 219);">Genre</h5>
             <hr class="line">
-            <p class="mt-3" id="movieOverview">Loading description...</p> <br>
+            <p class="mt-3" id="movieOverview">Duke u ngrakuar...</p> <br>
 
             <div class="play2ri row mt-4">
               <div class="col-md-6">
                 <div class="play2ril" style="color:rgb(219, 219, 219);">
-                  <h6 class="fw-normal">Running Time: <span class="pull-right" id="movieRuntime">...</span></h6>
+                  <h6 class="fw-normal">Kohëzgjatja <span class="pull-right" id="movieRuntime">...</span></h6>
                   <hr class="hr_1">
-                  <h6 class="fw-normal">Genre: <span class="pull-right" id="genreList">...</span></h6>
+                  <h6 class="fw-normal">Zhanri: <span class="pull-right" id="genreList">...</span></h6>
                   <hr class="hr_1">
-                  <h6 class="fw-normal">Release Date: <span class="pull-right" id="releaseDate">...</span></h6>
+                  <h6 class="fw-normal">Data publikimit: <span class="pull-right" id="releaseDate">...</span></h6>
                   <hr class="hr_1 mb-0"> <br>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="play2rir text-white">
-                  <h6 class="fw-bold mb-2">IMDb Rating</h6>
+                  <h6 class="fw-bold mb-2">IMDb</h6>
                   <div class="progress mb-3" style="height: 18px; background-color: #333;">
                     <div class="progress-bar bg-danger" id="imdbProgress" style="width: 0%;" role="progressbar"></div>
                   </div>
@@ -238,7 +238,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_watchlist'])) 
             </div>
             <input type="hidden" name="rating" id="ratingValue">
             <textarea class="form-control mb-2" name="comment" placeholder="" rows="2" style="resize: none;"></textarea>
-            <button type="submit" class="btn btn-danger">Dergo</button>
+            <button type="submit" class="btn btn-danger">Dërgo</button>
           </form>
         </div>
       <?php endif; ?>
