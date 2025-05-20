@@ -56,6 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_watchlist'])) 
     <link href="css/font-awesome.min.css" rel="stylesheet" >
     <link href="css/global.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
+    
+
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani&display=swap" rel="stylesheet">
     <script src="js/bootstrap.bundle.min.js"></script>
   <style>
