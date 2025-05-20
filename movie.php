@@ -22,7 +22,7 @@ if ($loggedInUserId) {
   $stmt->close();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_watchlist'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_watchlist'])) {
     if (isset($_SESSION['user_id'])) {
         $userId = $_SESSION['user_id'];
         $movieId = $_POST['movie_id'];
@@ -210,10 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_watchlist'])) {
                         <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-plus me-2"></i> Për t'u parë</button>
                       </form>
                       
-                    <?php else: ?>
-                      <div class="alert alert-warning text-center w-100">
-                        Please log in to add movies to your watchlist or mark them as watched.
-                      </div>
+                    
                     <?php endif; ?>
                   </div>
 
@@ -530,6 +527,45 @@ document.querySelectorAll('.delete-comment-btn').forEach(btn => {
     });
   }
 </script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const stars = document.querySelectorAll('.star');
+    const ratingInput = document.getElementById('ratingValue');
+
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        const rating = star.getAttribute('data-value');
+        ratingInput.value = rating;
+
+        // Reset all stars
+        stars.forEach(s => s.style.color = '');
+
+        // Highlight stars up to selected
+        stars.forEach(s => {
+          if (s.getAttribute('data-value') <= rating) {
+            s.style.color = 'gold';
+          }
+        });
+      });
+
+      // Optional: add hover effect
+      star.addEventListener('mouseover', () => {
+        const hoverValue = star.getAttribute('data-value');
+        stars.forEach(s => {
+          s.style.color = (s.getAttribute('data-value') <= hoverValue) ? 'lightgray' : '';
+        });
+      });
+
+      star.addEventListener('mouseout', () => {
+        const currentRating = ratingInput.value;
+        stars.forEach(s => {
+          s.style.color = (s.getAttribute('data-value') <= currentRating) ? 'gold' : '';
+        });
+      });
+    });
+  });
+</script>
+
 
 </body>
 </html>

@@ -1,20 +1,22 @@
-<?php include '../header.php'; ?>
-
+<?php include 'header.php';?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>MovieHD - Search Results</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/search.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>MovieHD</title>
+
+	<link href="css/bootstrap.min.css" rel="stylesheet" >
+	<link href="css/font-awesome.min.css" rel="stylesheet" >
+	<link href="css/global.css" rel="stylesheet">
+	<link href="css/search.css" rel="stylesheet">
+	<link href="css/index.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Rajdhani&display=swap" rel="stylesheet">
+
+	<script src="js/bootstrap.bundle.min.js"></script>
 </head>
 <body style="background-color:rgb(0, 0, 0);">
-
 
 
 
@@ -54,7 +56,7 @@
                     echo "</div>";
                     // Movie info
                     echo "<div class='movie-info'>";
-                    echo "<h3><a href='../movie.php?id=" . $movie['id'] . "'>" . htmlspecialchars($movie['title']) . "</a></h3>";
+                    echo "<h3><a href='movie.php?id=" . $movie['id'] . "'>" . htmlspecialchars($movie['title']) . "</a></h3>";
                     // Truncate overview to 100 characters
                     $overview = strlen($movie['overview']) > 100 ? substr($movie['overview'], 0, 97) . '...' : $movie['overview'];
                     echo "<p>" . htmlspecialchars($overview) . "</p>";
@@ -88,5 +90,8 @@
     </div>
 </section>
 
-<?php include '../footer.php'; ?>
+<?php include 'footer.php'; ?>
+
+</body>
+</html>
 

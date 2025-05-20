@@ -592,14 +592,9 @@ min-height:200px;
 @media (min-width:1201px) and (max-width:1255px) {
 
  }
-
- .star {
-  font-size: 2rem;
-  color: #fff;
+.star {
   cursor: pointer;
+  font-size: 24px;
+  color: gray;
   transition: color 0.2s;
-}
-.star:hover,
-.star.selected {
-  color: #e50914;
 }
