@@ -99,7 +99,7 @@ $watchlist = $result->fetch_all(MYSQLI_ASSOC);
         const loadMoreBtn = document.getElementById("loadMoreBtn");
         let visibleCount = 12;
 
-        // Initially show only 12
+        
         movieItems.forEach((item, index) => {
             if (index >= visibleCount) {
                 item.style.display = "none";

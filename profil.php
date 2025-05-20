@@ -10,22 +10,22 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Përditëso të dhënat nëse forma është dorëzuar
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $currentPassword = $_POST['current_password'] ?? '';
     $newPassword = $_POST['new_password'] ?? '';
 
-    // Përditëso username dhe email
+
     $sql = "UPDATE user SET username = ?, email = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssi", $username, $email, $user_id);
     $stmt->execute();
 
-    // Nëse është plotësuar fjalëkalimi i ri, kontrollo të vjetrin dhe përditëso
+
     if (!empty($currentPassword) && !empty($newPassword)) {
-        // Merre fjalëkalimin aktual nga databaza
+       
         $sql = "SELECT password FROM user WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $user_id);
@@ -33,9 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $stmt->get_result();
         $userPasswordData = $result->fetch_assoc();
 
-        // Krahaso fjalëkalimin aktual me atë në databazë
+        
         if (password_verify($currentPassword, $userPasswordData['password'])) {
-            // Ruaj fjalëkalimin e ri të hash-uar
+            
             $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
             $sql = "UPDATE user SET password = ? WHERE id = ?";
             $stmt = $conn->prepare($sql);
@@ -137,40 +137,40 @@ $user = $result->fetch_assoc();
 
 <script>
 document.getElementById('editBtn').addEventListener('click', function () {
-    // Hiq readonly nga username/email
+    
     document.querySelectorAll('input[name="username"], input[name="email"]').forEach(function(input) {
         input.removeAttribute('readonly');
     });
 
-    // Aktivizo input-et për password
+    
     document.querySelectorAll('input[name="current_password"], input[name="new_password"]').forEach(function(input) {
         input.removeAttribute('disabled');
     });
 
-    // Shfaq butonin "Ruaj ndryshimet"
+    
     document.getElementById('saveBtn').style.display = 'inline-block';
 
-    // Fsheh butonin "Ndrysho"
+   
     this.style.display = 'none';
 });
 </script>
 <script>
 document.getElementById('editBtn').addEventListener('click', function () {
-    // Fsheh tekstin
+   
     document.getElementById('usernameDisplay').classList.add('d-none');
     document.getElementById('emailDisplay').classList.add('d-none');
 
-    // Shfaq input-et
+    
     document.getElementById('usernameInput').classList.remove('d-none');
     document.getElementById('emailInput').classList.remove('d-none');
 
-    // Shfaq fushat e passwordit
+    
     document.getElementById('passwordFields').classList.remove('d-none');
 
-    // Shfaq butonin "Ruaj"
+    
     document.getElementById('saveBtn').classList.remove('d-none');
 
-    // Fsheh butonin "Ndrysho"
+    
     this.style.display = 'none';
 });
 </script>

@@ -1,7 +1,7 @@
 <?php
-session_start(); // enable session
+session_start(); 
 
-include './logic/config.php'; // your DB connection
+include './logic/config.php'; 
 
 $isLoggedIn = isset($_SESSION['user_id']);
 include 'header.php';
@@ -214,7 +214,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_watchlist'])) 
                     <?php endif; ?>
                   </div>
 
-                  <!-- Alert container outside of button flex container -->
+                  
                   <div id="alert-container" style="position: fixed; top: 20px; right: 20px; z-index: 1050; width: 300px;"></div>
 
                 </div>
@@ -336,7 +336,7 @@ document.querySelectorAll('.delete-comment-btn').forEach(btn => {
     alert.className = `alert fade show`;
     alert.role = 'alert';
 
-    // Center and style alert container
+   
     alert.style.position = 'fixed';
     alert.style.top = '20px';
     alert.style.left = '50%';
@@ -370,7 +370,7 @@ document.querySelectorAll('.delete-comment-btn').forEach(btn => {
     alert.textContent = message;
     alertContainer.appendChild(alert);
 
-    // Animate fade out and slide up before removing
+    
     setTimeout(() => {
       alert.style.opacity = '0';
       alert.style.transform = 'translateX(-50%) translateY(-20px)';
@@ -404,10 +404,10 @@ document.querySelectorAll('.delete-comment-btn').forEach(btn => {
   }
 
     document.addEventListener('DOMContentLoaded', () => {
-      // Always run this for everyone
+      
       loadMovieDetails();
 
-      // Only add event listener if the form exists (for logged-in users)
+      
       const watchedForm = document.getElementById('watchedForm');
       if (watchedForm) {
         watchedForm.addEventListener('submit', function(e) {
@@ -449,7 +449,7 @@ document.querySelectorAll('.delete-comment-btn').forEach(btn => {
           .then(data => {
             if (data.status === 'success') {
               alert('✔️ ' + data.message);
-              location.reload(); // Refresh to show the new comment
+              location.reload(); 
             } else {
               alert('⚠️ ' + data.message);
             }
@@ -460,7 +460,7 @@ document.querySelectorAll('.delete-comment-btn').forEach(btn => {
       const watchlistForm = document.getElementById('watchlistForm');
       if (watchlistForm) {
         watchlistForm.addEventListener('submit', function(e) {
-          e.preventDefault(); // Prevent default form submission
+          e.preventDefault(); 
 
           const form = e.target;
           const formData = new FormData(form);
@@ -537,10 +537,10 @@ document.querySelectorAll('.delete-comment-btn').forEach(btn => {
         const rating = star.getAttribute('data-value');
         ratingInput.value = rating;
 
-        // Reset all stars
+        
         stars.forEach(s => s.style.color = '');
 
-        // Highlight stars up to selected
+        
         stars.forEach(s => {
           if (s.getAttribute('data-value') <= rating) {
             s.style.color = 'gold';
@@ -548,7 +548,7 @@ document.querySelectorAll('.delete-comment-btn').forEach(btn => {
         });
       });
 
-      // Optional: add hover effect
+      
       star.addEventListener('mouseover', () => {
         const hoverValue = star.getAttribute('data-value');
         stars.forEach(s => {
